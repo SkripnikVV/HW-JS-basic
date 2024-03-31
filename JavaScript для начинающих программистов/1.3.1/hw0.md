@@ -1,4 +1,4 @@
-# Home Work
+# Home Work 1.3
 
 1. В переменных a и b хранятся числа. 
 
@@ -29,4 +29,85 @@ console.log(`length ${a} + lenght ${b} = ${a.length + b.length}`)
 const str = prompt('input number, please: ');
 const result = [...str].map(x => +x).reduce((accumulator, value) => accumulator + value)
 console.log(result)
+```
+# Home Work 1.5
+
+1. В переменных a и b хранятся числа. Вывести в консоль наибольшее из них.
+```javascript
+const a = 5, b = 10;
+(a > b) ? console.log(`a: ${a}`) : console.log(`b: ${b}`)
+```
+2. Запросить у пользователя ввод числа от 1 до 12. Вывести в консоль название месяца, соответствующее этому числу 
+(1 — январь, 2 — февраль и т.д.).
+```javascript
+// const month = +prompt('input month: ');
+function get_month(month) {
+    switch (month) {
+        case 1:
+            console.log('январь')
+            break;
+
+        case 2:
+            console.log('февраль')
+            break;
+
+        case 3:
+            console.log('март')
+            break;
+
+        case 4:
+            console.log('апрель')
+            break;
+
+        case 5:
+            console.log('май')
+            break;
+
+        case 6:
+            console.log('июнь')
+            break;
+
+        case 7:
+            console.log('июль')
+            break;
+
+        case 8:
+            console.log('август')
+            break;
+
+        case 9:
+            console.log('сентябрь')
+            break;
+
+        case 10:
+            console.log('октябрь')
+            break;
+
+        case 11:
+            console.log('ноябрь')
+            break;
+
+        case 12:
+            console.log('декабрь')
+            break;
+        default:
+            console.log('bad')
+    }
+}
+
+for (index = 0; index < 14; index++) {
+    get_month(index)
+}
+```
+3. В переменных circle и square хранятся площади круга и квадрата соответственно. Написать программу,
+которая определяет, поместится ли круг в квадрат
+
+```javascript
+const circle = 4, square = 5.095;
+const diameter = ((circle / Math.PI) ** 0.5) * 2;
+const side = square ** 0.5;
+console.log('диаметр: ', diameter);
+console.log('сторона: ', side);
+(diameter <= side) ? console.log('поместится') : console.log('НЕ поместится')
+
 ```
