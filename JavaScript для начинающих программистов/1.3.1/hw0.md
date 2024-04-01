@@ -95,7 +95,7 @@ function get_month(month) {
     }
 }
 
-for (index = 0; index < 14; index++) {
+for (let index = 0; index < 14; index++) {
     get_month(index)
 }
 ```
