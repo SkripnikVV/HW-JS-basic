@@ -111,3 +111,40 @@ console.log('сторона: ', side);
 (diameter <= side) ? console.log('поместится') : console.log('НЕ поместится')
 
 ```
+
+# Home Work 1.6
+
+1.Вывести в консоль сумму всех целых чисел от 50 до 100.
+```javascript
+let accumulator = 0
+for (let index=50; index <= 100; index+=2) {
+    accumulator += index
+    console.log(`${index} acc: ${accumulator}`)
+}
+```
+
+2.Вывести в консоль таблицу умножения на 7.
+```
+7 x 1 = 7
+7 x 2 = 14
+…
+7 x 9 = 63
+```
+```javascript
+const seven = 7;
+for (index=1; index <10; index++) {
+    console.log(`${seven} x ${index} = ${seven * index}`)
+}
+```
+*Запросить у пользователя ввод числа N. Вывести в консоль среднее арифметическое всех нечётных чисел от 1 до N
+```javascript
+const limitNumber = 15;
+let count = 0;
+let acc = 0;
+for (index = 1; index <= limitNumber; index += 2) {
+    count += 1;
+    acc += index;
+    console.log(`${count}: ${index}: ${acc}`)
+}
+console.log('avg', acc / count)
+```
