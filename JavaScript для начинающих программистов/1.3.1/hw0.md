@@ -1,4 +1,4 @@
-# Home Work 1.3
+# Домашнее задание № 1
 
 1. В переменных a и b хранятся числа. 
 
@@ -30,7 +30,7 @@ const str = prompt('input number, please: ');
 const result = [...str].map(x => +x).reduce((accumulator, value) => accumulator + value)
 console.log(result)
 ```
-# Home Work 1.5
+# Домашнее задание № 2
 
 1. В переменных a и b хранятся числа. Вывести в консоль наибольшее из них.
 ```javascript
@@ -112,7 +112,7 @@ console.log('сторона: ', side);
 
 ```
 
-# Home Work 1.6
+# Домашнее задание № 3
 
 1.Вывести в консоль сумму всех целых чисел от 50 до 100.
 ```javascript
@@ -147,4 +147,183 @@ for (index = 1; index <= limitNumber; index += 2) {
     console.log(`${count}: ${index}: ${acc}`)
 }
 console.log('avg', acc / count)
+```
+
+# Домашнее задание № 4
+
+Создайте объект user, содержащий поле name со значением ‘John’.
+1.Запросить у пользователя ввод числа. Записать введенное значение в поле age объекта user.
+
+2.Создать копию объекта user с именем admin. Добавить новому объекту поле role со значением  ‘admin’.
+
+*Записать все значения полей объекта admin в отдельные переменные. Имена переменных должны совпадать с названиями полей.
+
+```javascript
+let user = {'name': 'John'};
+console.log(user)
+let userAge = 33;
+user['age'] = userAge
+let admin = Object.assign({}, user, {'role' : 'admin'})
+const {name, age, role} = admin;
+console.log(user)
+console.log(admin)
+console.log(name, age, role)
+```
+
+# Домашнее задание № 5 «Массивы»
+
+Создайте массив целых чисел из 10 элементов.
+
+1.Выведите в консоль сумму всех элементов массива.
+2.Создайте новый массив на основе исходного, в котором каждый элемент будет вдвое больше  элемента исходного массива с 
+таким же индексом.
+(a[1] = 3, b[1] = 6, где a — исходный массив, b — новый массив).
+
+3.*Найдите и выведите в консоль наибольший и наименьший элементы исходного массива
+```javascript
+const arr = [1,11,-22,2, 5,53,23,76,98,45,47,25,47,97,45,24,66,7,667,87,9006,45,564, 36, 4643, 57, 5775, 790,361,4637];
+console.log(arr)
+
+const sum = arr.reduce((acc, value) => acc += value);
+console.log('sum', sum)
+
+let max = -Infinity;
+let min = Infinity;
+arr.forEach(x => {
+    x > max ? max = x : max;
+    x < min ? min = x : min;
+});
+console.log('max', max)
+console.log('min', min)
+
+let doubleArr = arr.map(x => x * 2);
+console.log(doubleArr);
+
+doubleArr = doubleArr.sort((a, b) => {
+    if (a > b) return 1;
+    if (a === b) return 0;
+    if (a < b) return -1;
+});
+console.log(doubleArr);
+
+```
+# Домашнее задание №6 «Функции»
+
+1.Напишите функцию diff, которая получает в качестве параметров 2 числа и возвращает разницу между наибольшим 
+и наименьшим.
+```javascript
+const diff = (a, b) => {
+    return (a > b) ? a-b : b-a;
+}
+
+console.log(diff(5, 3));
+console.log(diff(5, 30));
+```
+2.Напишите функцию isWord, которая принимает на вход текстовую строку. Функция возвращает true, если строка состоит из 
+одного слова и false, если из нескольких.
+```javascript
+const isWord = (str) => {
+    console.log(str);
+    return (str.indexOf(' ') > -1) ? false : true;
+}
+console.log(isWord('word'));
+console.log(isWord('two word'));
+```
+
+*Напишите функцию pow(a, x), которая вернёт значение числа a, возведённого в степень x.
+```javascript
+const pow = (value, power) => {
+    const result = Math.pow(value, power);
+    console.log(`${value} ** ${power} = ${result}`);
+    return result;
+}
+pow(2, 3);
+```
+
+# Домашнее задание № 7 «Работа с DOM»
+
+Сверстать страницу и подключить к ней файл со  скриптом. На странице должны быть три текстовых  параграфа, поле ввода 
+и кнопка. Напишите скрипт, который будет выполнять следующие условия:
+
+1.Кнопка скрыта, если в поле ввода нет значения.
+
+2.При клике на кнопку добавляется новый параграф, содержащий текст из поля ввода. 
+
+3.*Если параграфов становится больше 5, первый из них удаляется.
+
+```html
+<!--index.html-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <p>hello world</p>
+    <p>from JavaScript</p>
+    <p>postscriptum</p>
+</div>
+<div><input type="text" class="text-field"></div>
+<br>
+<div><button hidden="hidden" class="button">Click me</button></div>
+<script src="index.js"></script>
+</body>
+</html>
+```
+
+```javascript
+// index.js
+document.addEventListener('DOMContentLoaded', main);
+
+const button = document.querySelector('.button'),
+    textInput = document.querySelector('.text-field'),
+    container = document.querySelector('.container'),
+    paragrafLimit = 5;
+
+
+function main() {
+    console.log('loaded')
+    console.log(textInput);
+    textInput.addEventListener('input', inputChange);
+    textInput.addEventListener('keypress', (event) => {if (event.key ==='Enter') {
+        buttonClick()
+    }})
+    button.addEventListener('click', buttonClick);
+}
+
+function inputChange(e){
+    if (e.target.value.length > 0) {
+        button.hidden = "";
+    } else {
+        button.hidden = "hidden";
+    }
+    console.log(e.target.value);
+}
+
+function buttonClick() {
+    if (textInput.value.length === 0) {return}
+    removeParagraf(paragrafLimit);
+    addParagraf();
+    textInput.value = "";
+    button.hidden = 'hidden';
+    textInput.focus()
+}
+
+function removeParagraf(limit=5) {
+    const paragrafs = container.querySelectorAll('p');
+    if (paragrafs.length === limit) {
+        paragrafs[0].remove();
+    }
+}
+
+function addParagraf() {
+    element = document.createElement('p');
+    element.textContent = textInput.value;
+    container.append(element);
+}
 ```
