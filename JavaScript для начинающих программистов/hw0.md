@@ -7,7 +7,7 @@
 ```javascript
 const a = 5,
     b = 10;
-console.log(`${a} * ${b} = ${a * b}`)
+console.log(`${a} * ${b} = ${a * b}`);
 ```
 
 2. В двух переменных хранятся строки символов. 
@@ -17,8 +17,7 @@ console.log(`${a} * ${b} = ${a * b}`)
 ```javascript
 const a = 'hello', 
     b = 'world';
-console.log(`length ${a} + lenght ${b} = ${a.length + b.length}`)
-
+console.log(`length ${a} + lenght ${b} = ${a.length + b.length}`);
 ```
 
 3. Написать программу, которая запрашивает у пользователя ввод трёхзначного числа, а потом выводит в
@@ -27,15 +26,27 @@ console.log(`length ${a} + lenght ${b} = ${a.length + b.length}`)
 ```javascript
 // const str = '111111111'
 const str = prompt('input number, please: ');
-const result = [...str].map(x => +x).reduce((accumulator, value) => accumulator + value)
+const result = [...str].map(x => +x).reduce((accumulator, value) => accumulator + value);
 console.log(result)
 ```
+
+```javascript
+let acc = {odd: 0, even: 0};
+const str = '123456'
+// const str = prompt('input number, please: ');
+const result = [...str]
+    .map(Number)
+    .reduce((acc, value) => (value % 2 === 0) ? {odd: acc.odd + value, even: acc.even} : {odd: acc.odd, even: acc.even + value}, acc);
+console.log(result);
+```
+
 # Домашнее задание № 2
 
 1. В переменных a и b хранятся числа. Вывести в консоль наибольшее из них.
 ```javascript
 const a = 5, b = 10;
-(a > b) ? console.log(`a: ${a}`) : console.log(`b: ${b}`)
+(a > b) ? console.log(`a: ${a}`) : console.log(`b: ${b}`);
+console.log((a > b) ? a : b);
 ```
 2. Запросить у пользователя ввод числа от 1 до 12. Вывести в консоль название месяца, соответствующее этому числу 
 (1 — январь, 2 — февраль и т.д.).
@@ -117,10 +128,10 @@ console.log('сторона: ', side);
 1.Вывести в консоль сумму всех целых чисел от 50 до 100.
 ```javascript
 let accumulator = 0
-for (let index=50; index <= 100; index+=2) {
+for (let index=50; index <= 100; index++) {
     accumulator += index
-    console.log(`${index} acc: ${accumulator}`)
 }
+console.log(`acc: ${accumulator}`);
 ```
 
 2.Вывести в консоль таблицу умножения на 7.
@@ -327,3 +338,85 @@ function addParagraf() {
     container.append(element);
 }
 ```
+
+# Домашнее задание №8 «Работа с датами»
+
+1.Запросите у пользователя дату в формате ДД.ММ.ГГГГ. Напишите программу, выводящую день недели по введённой дате.
+
+```javascript
+let userDate = '23.08.1983', days = ['Вс',"Пн","Вт","Ср","Чт","Пт","Сб"];
+[day, month, year] = userDate.split('.');
+console.log(day, month, year);
+const date = new Date(`${year}-${month}-${day}`);
+console.log(days[date.getDay()]);
+```
+
+2.Написать программу, которая выводит в консоль количество минут, прошедшее с начала сегодняшнего дня.
+```javascript
+const today = new Date(),
+    minutes = today.getHours() * 60 + today.getMinutes(),
+    totalMinutes = 24 * 60;
+console.log(totalMinutes - minutes);
+```
+3.*В двух переменных хранятся даты рождения двух пользователей в формате ДД.ММ.ГГГГ. Написать программу, которая
+определяет более молодого пользователя
+
+```javascript
+const getMinUser = (...users) => {
+    return users.reduce((acc, user) => {
+        const intAge = convertDate(user).getTime();
+        return (intAge < acc.intAge) ? {intAge: intAge, strAge: user}: acc
+    }, {intAge: Infinity, strAge: 'noname'})
+}
+
+const convertDate = (strDate) => {
+    return new Date(strDate.split('.').reverse().join('-'))
+}
+console.log('result', getMinUser('01.01.2022', '23.08.1983', '01.01.1944'))
+
+```
+# Домашнее задание №9 «Математические операции»
+1. Даны длины трёх сторон треугольника. Определить, является ли треугольник прямоугольным.
+```javascript
+// не помню геометрию
+```
+2. Пользователь вводит число R. Написать программу,  которая выведет в консоль длину окружности и площадь круга с радиусом R.
+```javascript
+const r = 15;
+const square = 2 * Math.PI + Math.pow(r, 2);
+const length = 2 * r * Math.PI;
+console.log('square: ', square);
+console.log('length: ', length);
+```
+
+3. *Пользователь вводит числа a, b и c. Написать программу, выводящую корни квадратного уравнения с коэффициентами a, b и c.
+```javascript
+const a = 1, b = 2, c = 1;
+console.log(`${a}x ^ 2 + ${b}x + ${c} = 0`);
+
+const getDiscriminanum = (a, b, c) => Math.pow(b, 2) - 4 * a * c;
+
+const getFirstValue = (d, a, b) => (-1 * b + Math.sqrt(d)) / (2 * a);
+
+const getSecondValue = (d, a, b) => (-1 * b - Math.sqrt(d)) / (2 * a);
+
+d = getDiscriminanum(a, b, c);
+console.log(`Дискриминант: ${d}`)
+if (d < 0) {
+    console.log(`d = ${d}, корней нет`);
+} else if (d == 0) {
+    const x = getFirstValue(d, a, b)
+    console.log('есть 1 корень: ', x);
+} else {
+    const x = getFirstValue(d, a, b), y = getSecondValue(d, a, b);
+    console.log('корень 1: ', x.toFixed(2), 'корень 2: ', y.toFixed(2));
+}
+
+```
+
+# Домашнее задание №10 «Регулярные выражения»
+
+Пользователь вводит текстовую строку. Определить с помощью регулярного выражения, является ли введённая строка:
+1.Датой.
+2.Адресом электронной почты.
+3.*Номером телефона.
