@@ -420,3 +420,80 @@ if (d < 0) {
 1.Датой.
 2.Адресом электронной почты.
 3.*Номером телефона.
+
+```javascript
+const isDate = (str) => {
+    const rsm = str.match(/(\d{2})[\.|\-](\d{2})[\.|\-](\d{4})+/);
+    if (rsm) {
+        console.log('найдена дата: ', str);
+        return true;
+    }
+    return false;
+}
+
+const isPhone = (str) => {
+    let cleanStr = str.split('').filter(x => x === '+' || !isNaN(x)).join('');
+    const rsm = cleanStr.match(/\b[8|\+\d{1,4}]\d{10,}\b/);
+    if (rsm) {
+        console.log('найден телефон: ', str);
+        return true;
+    }
+    return false;
+}
+
+const isMail = (str) => {
+    const rsm = str.match(/(\w+[\.|\d|\-|_|\w]+)(@\w+[\.|\d|\-|_|\w]+)(\.\w{2,5})/);
+    if (rsm) {
+        console.log('найдена почта: ', rsm, str);
+        return true;
+    }
+    return false;
+}
+
+const strings = ['23.08.1983', '+7-903-903-93-93','8-903-903-93-96', 'vova.1983.goo-gle@rus-mail.ru']
+
+strings.forEach(string => {
+    isDate(string) || isPhone(string) || isMail(string);
+})
+
+```
+
+# Задачи с собесов
+
+Сделать получение значений объекта по пути.
+
+## через рекурсию
+
+```javascript
+const exampleObject = { items: [{ child: { colors: [{ name: 'red' }, { name: 'green' }] } }] };
+
+function getValueByPath(obj, path) {
+    const keys = path.split('.');
+    if (keys.length === 1) {
+        return obj[keys[0]];
+    } else {
+        return getValueByPath(obj[keys[0]], keys.slice(1,).join('.'));
+    }
+}
+
+const result = getValueByPath(exampleObject, "items.0.child.colors.1.name"); // "green"
+console.log('result', result);
+```
+
+## через цикл
+```javascript
+// Примеры использования
+const exampleObject = { items: [{ child: { colors: [{ name: 'red' }, { name: 'green' }] } }] };
+
+function getValueByPath(obj, path) {
+    let outerObj = obj;
+    let keys = path.split('.');
+    keys.forEach(key => {
+        outerObj = outerObj[key];
+    });
+    return outerObj
+}
+
+const result = getValueByPath(exampleObject, "items.0.child.colors.1.name"); // "green"
+console.log('result', result);
+```
